@@ -22,6 +22,7 @@ function auto_featured_image()
 	$attached_image = get_children("post_parent=$post->ID&amp;post_type=attachment&amp;post_mime_type=image&amp;numberposts=1");
 	if ($attached_image) {
 		foreach ($attached_image as $attachment_id => $attachment) {
+            echo $attachment_id;
 			if (wp_get_attachment_image($attachment_id) === '') {
 				echo $attachment_id;
 				set_post_thumbnail($post->ID, $attachment_id);
