@@ -22,16 +22,16 @@ function auto_featured_image()
 	$attached_image = get_children("post_parent=$post->ID&amp;post_type=attachment&amp;post_mime_type=image&amp;numberposts=1");
 	if ($attached_image) {
 		foreach ($attached_image as $attachment_id => $attachment) {
-            echo $attachment_id;
+            // echo $attachment_id;
 			if (wp_get_attachment_image($attachment_id) === '') {
-				echo $attachment_id;
+				// echo $attachment_id;
 				set_post_thumbnail($post->ID, $attachment_id);
 			}
 		}
 	} else {
 		$matches = array();
         $output = preg_match_all('/<img.+?src=[\'"]([^\'"]+)[\'"].*?>/i', $post->post_content, $matches);
-        print_r($matches);
+        // print_r($matches);
 		if (isset($matches[1]) && isset($matches[1][0])) {
 			$firstImg = $matches[1][0];
 			$oldImgPath = str_replace('https://tribratanews.gorontalo.polri.go.id/', '../', $firstImg);
