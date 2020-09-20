@@ -2,19 +2,30 @@
 
 include_once(ABSPATH . 'wp-admin/includes/image.php');
 
-add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
-function my_theme_enqueue_styles() {
-    $parenthandle = 'parent-style'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
-    $theme = wp_get_theme();
-    wp_enqueue_style( $parenthandle, get_template_directory_uri() . '/style.css', 
-        array(),  // if the parent theme code has a dependency, copy it to here
-        $theme->parent()->get('Version')
-    );
-    wp_enqueue_style( 'child-style', get_stylesheet_uri(),
-        array( $parenthandle ),
-        $theme->get('Version') // this only works if you have Version in the style header
-    );
+add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
+function my_theme_enqueue_styles()
+{
+	$parenthandle = 'parent-style'; // This is 'twentyfifteen-style' for the Twenty Fifteen theme.
+	$theme = wp_get_theme();
+	wp_enqueue_style(
+		$parenthandle,
+		get_template_directory_uri() . '/style.css',
+		array(),  // if the parent theme code has a dependency, copy it to here
+		$theme->parent()->get('Version')
+	);
+	wp_enqueue_style(
+		'child-style',
+		get_stylesheet_uri(),
+		array($parenthandle),
+		$theme->get('Version') // this only works if you have Version in the style header
+	);
 }
+
+function my_comment_time_ago_function()
+{
+	return sprintf(esc_html__('%s ago', 'textdomain'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
+}
+add_filter('get_comment_date', 'my_comment_time_ago_function');
 
 function auto_featured_image()
 {
@@ -22,7 +33,7 @@ function auto_featured_image()
 	$attached_image = get_children("post_parent=$post->ID&amp;post_type=attachment&amp;post_mime_type=image&amp;numberposts=1");
 	if ($attached_image) {
 		foreach ($attached_image as $attachment_id => $attachment) {
-            // echo $attachment_id;
+			// echo $attachment_id;
 			if (wp_get_attachment_image($attachment_id) === '') {
 				// echo $attachment_id;
 				set_post_thumbnail($post->ID, $attachment_id);
@@ -30,8 +41,8 @@ function auto_featured_image()
 		}
 	} else {
 		$matches = array();
-        $output = preg_match_all('/<img.+?src=[\'"]([^\'"]+)[\'"].*?>/i', $post->post_content, $matches);
-        // print_r($matches);
+		$output = preg_match_all('/<img.+?src=[\'"]([^\'"]+)[\'"].*?>/i', $post->post_content, $matches);
+		// print_r($matches);
 		if (isset($matches[1]) && isset($matches[1][0])) {
 			$firstImg = $matches[1][0];
 			$oldImgPath = str_replace('https://tribratanews.gorontalo.polri.go.id/', '../', $firstImg);
