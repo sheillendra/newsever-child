@@ -23,9 +23,15 @@ function my_theme_enqueue_styles()
 
 function my_comment_time_ago_function()
 {
-	return sprintf(esc_html__('%s ago', 'textdomain'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
+	return sprintf(esc_html__('%s ago', 'newsever'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
 }
 add_filter('get_comment_date', 'my_comment_time_ago_function');
+
+function my_post_time_ago_function()
+{
+	return sprintf(esc_html__('%s ago', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
+}
+add_filter('the_time', 'my_post_time_ago_function');
 
 function auto_featured_image()
 {
@@ -75,7 +81,7 @@ function auto_featured_image()
 }
 
 // Use it temporary to generate all featured images
-add_action('the_post', 'auto_featured_image');
+// add_action('the_post', 'auto_featured_image');
 // Used for new posts
 // add_action('save_post', 'auto_featured_image');
 // add_action('draft_to_publish', 'auto_featured_image');
