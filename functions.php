@@ -23,28 +23,34 @@ function my_theme_enqueue_styles()
 
 function my_comment_time_ago_function()
 {
-	return sprintf(esc_html__('%s ago', 'newsever'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
+	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
 }
 add_filter('get_comment_date', 'my_comment_time_ago_function');
 
 function my_post_time_ago_function()
 {
-	return sprintf(esc_html__('%s ago', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
+	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
 }
 add_filter('the_time', 'my_post_time_ago_function');
+
+function my_the_title($title)
+{
+	return mb_strimwidth($title, 0, 50, '...');;
+}
+add_filter('the_title', 'my_the_title');
 
 function auto_featured_image()
 {
 	global $post;
 	$attached_image = get_children("post_parent=$post->ID&amp;post_type=attachment&amp;post_mime_type=image&amp;numberposts=1");
 	if ($attached_image) {
-		foreach ($attached_image as $attachment_id => $attachment) {
-			// echo $attachment_id;
-			if (wp_get_attachment_image($attachment_id) === '') {
-				// echo $attachment_id;
-				set_post_thumbnail($post->ID, $attachment_id);
-			}
-		}
+		// foreach ($attached_image as $attachment_id => $attachment) {
+		// 	// echo $attachment_id;
+		// 	if (wp_get_attachment_image($attachment_id) === '') {
+		// 		// echo $attachment_id;
+		// 		set_post_thumbnail($post->ID, $attachment_id);
+		// 	}
+		// }
 	} else {
 		$matches = array();
 		$output = preg_match_all('/<img.+?src=[\'"]([^\'"]+)[\'"].*?>/i', $post->post_content, $matches);
