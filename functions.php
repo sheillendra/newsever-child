@@ -33,12 +33,6 @@ function my_post_time_ago_function()
 }
 add_filter('the_time', 'my_post_time_ago_function');
 
-function my_the_title($title)
-{
-	return mb_strimwidth($title, 0, 50, '...');;
-}
-add_filter('the_title', 'my_the_title');
-
 function auto_featured_image()
 {
 	global $post;
