@@ -83,7 +83,7 @@ if (!function_exists('newsever_banner_trending_posts')):
                             </div>
                             <div class="read-title">
                                 <h4>
-                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                    <a href="<?php the_permalink(); ?>" title="<?php echo $post->post_title?>"><?php echo ucwords(wp_trim_words($post->post_title, 6)); ?></a>
                                 </h4>
                             </div>
 
