@@ -88,3 +88,6 @@ function auto_featured_image()
 // add_action('new_to_publish', 'auto_featured_image');
 // add_action('pending_to_publish', 'auto_featured_image');
 // add_action('future_to_publish', 'auto_featured_image');
+
+
+require get_stylesheet_directory().'/inc/hooks/hook-front-page-banner-trending-posts.php';
