@@ -62,7 +62,7 @@ if (!class_exists('Newsever_Posts_Express_List')) :
                 <?php if (!empty($title)): ?>
                     <h4 class="widget-title header-after1">
                         <span class="header-after">
-                            <?php echo esc_html($title); ?>
+                            <?php echo wp_trim_words(esc_html($title)); ?>
                             </span>
                     </h4>
                 <?php endif; ?>
