@@ -149,7 +149,7 @@ $section_title = newsever_get_option('main_banner_section_label');
                         </div>
                         <div class="read-title">
                             <h4>
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                <a href="<?php the_permalink(); ?>" title="<?php echo $post->post_title?>"><?php echo ucwords(strtolower(wp_trim_words($post->post_title, 9))); ?></a>
                             </h4>
                         </div>
                         <div class="entry-meta">
