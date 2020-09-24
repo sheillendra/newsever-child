@@ -89,10 +89,14 @@ function auto_featured_image()
 // add_action('pending_to_publish', 'auto_featured_image');
 // add_action('future_to_publish', 'auto_featured_image');
 
-function my_admin_styles()
-{
-	wp_enqueue_style('admin-styles', get_stylesheet_directory_uri() . '/assets/css/mystyle.css');
-}
-add_action('admin_enqueue_scripts', 'my_admin_styles');
+/**
+ * style untuk admin
+ */
+// function my_admin_styles()
+// {
+// 	wp_enqueue_style('admin-styles', get_stylesheet_directory_uri() . '/assets/css/mystyle.css');
+// }
+// add_action('admin_enqueue_scripts', 'my_admin_styles');
 
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page-banner-trending-posts.php';
+require get_stylesheet_directory() . '/inc/hooks/hook-single-header.php';
