@@ -98,5 +98,28 @@ function auto_featured_image()
 // }
 // add_action('admin_enqueue_scripts', 'my_admin_styles');
 
+$custom_logo_id = get_theme_mod('custom_logo');
+// We have a logo. Logo is go.
+if ($custom_logo_id) {
+	function my_login_logo()
+	{
+		global $custom_logo_id;
+		$image = wp_get_attachment_image_src($custom_logo_id, 'full');
+?>
+		<style type="text/css">
+			#login h1 a,
+			.login h1 a {
+				background-image: url(<?php echo $image[0]; ?>);
+				height: 65px;
+				width: 320px;
+				background-size: 320px 65px;
+				background-repeat: no-repeat;
+				padding-bottom: 30px;
+			}
+		</style>
+<?php
+	}
+	add_action('login_enqueue_scripts', 'my_login_logo');
+}
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page-banner-trending-posts.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-single-header.php';
