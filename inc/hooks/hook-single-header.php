@@ -50,13 +50,13 @@ if (!function_exists('newsever_single_header')) :
                         if ($single_post_featured_image_view == 'default') :
                     ?>
                             <div class="newsever-entry-featured-image-wrap float-l <?php echo esc_attr($col_class); ?>">
-                                <?php do_action('newsever_action_single_featured_image'); ?>
+                                <?php do_action('newsever_child_action_single_featured_image'); ?>
                             </div>
                     <?php endif;
                     endif; ?>
 
                     <div class="newsever-entry-header-details-wrap float-l <?php echo esc_attr($col_class); ?>">
-                        <?php do_action('newsever_action_single_entry_details'); ?>
+                        <?php do_action('newsever_child_action_single_entry_details'); ?>
                     </div>
 
 
@@ -68,7 +68,7 @@ if (!function_exists('newsever_single_header')) :
             <?php
 
             if ($single_post_featured_image_view == 'full') {
-                do_action('newsever_action_single_featured_image');
+                do_action('newsever_child_action_single_featured_image');
             }
             ?>
 
@@ -80,9 +80,9 @@ if (!function_exists('newsever_single_header')) :
 endif;
 add_action('newsever_action_single_header', 'newsever_single_header', 40);
 
-add_action('newsever_action_single_entry_details', 'newsever_single_entry_details', 40);
+add_action('newsever_child_action_single_entry_details', 'newsever_child_single_entry_details', 40);
 
-function newsever_single_entry_details()
+function newsever_child_single_entry_details()
 {
     global $post;
 
@@ -112,6 +112,7 @@ function newsever_single_entry_details()
                 </span>
                 <?php newsever_post_item_publish_date(); ?>
                 <?php newsever_count_content_words($post->ID); ?>
+                [Sassy_Social_Share]
             </div>
             <?php
             newsever_single_post_social_share_icons($post->ID);
@@ -124,9 +125,9 @@ function newsever_single_entry_details()
 }
 
 
-add_action('newsever_action_single_featured_image', 'newsever_single_featured_image', 40);
+add_action('newsever_child_action_single_featured_image', 'newsever_child_single_featured_image', 40);
 
-function newsever_single_featured_image()
+function newsever_child_single_featured_image()
 {
     global $post;
     $post_id = $post->ID;
