@@ -112,7 +112,7 @@ function newsever_child_single_entry_details()
                 </span>
                 <?php newsever_post_item_publish_date(); ?>
                 <?php newsever_count_content_words($post->ID); ?>
-                [Sassy_Social_Share]
+                <?php echo do_shortcode('[Sassy_Social_Share style="background-color:#000;"]') ?>
             </div>
             <?php
             newsever_single_post_social_share_icons($post->ID);
