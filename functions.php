@@ -114,7 +114,6 @@ if ($custom_logo_id) {
 				width: 320px;
 				background-size: 320px 65px;
 				background-repeat: no-repeat;
-				padding-bottom: 30px;
 			}
 		</style>
 <?php
@@ -123,3 +122,4 @@ if ($custom_logo_id) {
 }
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page-banner-trending-posts.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-single-header.php';
+require get_stylesheet_directory() . '/inc/hooks/hook-front-page.php';

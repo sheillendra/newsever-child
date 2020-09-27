@@ -112,10 +112,13 @@ function newsever_child_single_entry_details()
                 </span>
                 <?php newsever_post_item_publish_date(); ?>
                 <?php newsever_count_content_words($post->ID); ?>
+                <?php echo do_shortcode('[post-views]') ?>
+            </div>
+            <div class="aft-social-share">
                 <?php echo do_shortcode('[Sassy_Social_Share]') ?>
             </div>
             <?php
-            newsever_single_post_social_share_icons($post->ID);
+            //newsever_single_post_social_share_icons($post->ID);
             ?>
         </div>
 
