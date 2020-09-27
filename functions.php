@@ -123,3 +123,45 @@ if ($custom_logo_id) {
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page-banner-trending-posts.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-single-header.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page.php';
+
+
+if ( ! function_exists( 'pvc_post_views' ) ) {
+
+	function pvc_post_views( $post_id = 0, $echo = true ) {
+		// get all data
+		$post_id = (int) ( empty( $post_id ) ? get_the_ID() : $post_id );
+		$options = Post_Views_Counter()->options['display'];
+		$views = pvc_get_post_views( $post_id );
+
+		// prepare display
+		$label = apply_filters( 'pvc_post_views_label', ( function_exists( 'icl_t' ) ? icl_t( 'Post Views Counter', 'Post Views Label', $options['label'] ) : $options['label'] ), $post_id );
+
+		// get icon class
+		$icon_class = ( $options['icon_class'] !== '' ? esc_attr( $options['icon_class'] ) : '' );
+
+		// add dashicons class if needed
+		$icon_class = strpos( $icon_class, 'dashicons' ) === 0 ? 'dashicons ' . $icon_class : $icon_class;
+
+		// prepare icon output
+		$icon = apply_filters( 'pvc_post_views_icon', '<span class="post-views-icon ' . $icon_class . '"></span>', $post_id );
+
+		$html = apply_filters(
+			'pvc_post_views_html',
+			'<span class="post-views post-' . $post_id . ' entry-meta">
+				' . ( $options['display_style']['icon'] && $icon_class !== '' ? $icon : '' ) . '
+				' . ( $options['display_style']['text'] && $label !== '' ? '<span class="post-views-label">' . $label . ' </span>' : '' ) . '
+				<span class="post-views-count">' . number_format_i18n( $views ) . '</span>
+			</span>',
+			$post_id,
+			$views,
+			$label,
+			$icon
+		);
+
+		if ( $echo )
+			echo $html;
+		else
+			return $html;
+	}
+
+}
