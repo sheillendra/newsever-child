@@ -72,7 +72,7 @@
                     </div>
                 </section>
             <?php } elseif (is_active_sidebar('home-content-widgets') && is_active_sidebar('home-sidebar-1-widgets')) {
-                ?>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                ?>
                 <section class="section-block-upper 2">
                     <div class="af-three-col-layout af-container-block-wrapper">
                         
