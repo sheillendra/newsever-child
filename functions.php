@@ -1,5 +1,5 @@
 <?php
-
+error_log('child');
 include_once(ABSPATH . 'wp-admin/includes/image.php');
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -123,6 +123,7 @@ if ($custom_logo_id) {
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page-banner-trending-posts.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-single-header.php';
 require get_stylesheet_directory() . '/inc/hooks/hook-front-page.php';
+require get_stylesheet_directory() . '/inc/template-functions.php';
 
 
 if ( ! function_exists( 'pvc_post_views' ) ) {
