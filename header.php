@@ -20,6 +20,10 @@
     <?php wp_head(); ?>
 </head>
 
+<?php 
+//remove parent hook
+remove_filter('body_class', 'newsever_body_classes');?>
+
 <body <?php body_class(); ?>>
 <?php
 if (function_exists('wp_body_open')) {
