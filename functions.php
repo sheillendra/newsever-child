@@ -91,18 +91,18 @@ add_action('wp_enqueue_scripts', 'newsever_child_scripts');
 if ( ! function_exists( 'suffice_child_enqueue_child_styles' ) ) {
 	function newsever_child_enqueue_child_styles() {
 	    // loading parent style
-	    // wp_register_style(
-	    //   'parent-style',
-	    //   get_template_directory_uri() . '/style.css'
-	    // );
-	    wp_enqueue_style( 'parent-style' , get_template_directory_uri() . '/style.css');
+	    wp_register_style(
+	      'parent-style',
+	      get_template_directory_uri() . '/style.css'
+	    );
+	    wp_enqueue_style( 'parent-style' );
 
 	    // loading child style
-	    // wp_register_style(
-	    //   'child-style',
-	    //   get_stylesheet_directory_uri() . '/style.css',
-	    // );
-	    wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css' , ['parent-style']);
+	    wp_register_style(
+	      'child-style',
+	      get_stylesheet_directory_uri() . '/style.css',
+	    );
+	    wp_enqueue_style( 'child-style');
 	 }
 }
 add_action( 'wp_enqueue_scripts', 'newsever_child_enqueue_child_styles' );
@@ -110,6 +110,18 @@ add_action( 'wp_enqueue_scripts', 'newsever_child_enqueue_child_styles' );
 /*Write here your own functions */
 
 require get_stylesheet_directory() . '/inc/template-functions.php';
+
+function my_comment_time_ago_function()
+{
+	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_comment_time('U'), current_time('timestamp')));
+}
+add_filter('get_comment_date', 'my_comment_time_ago_function');
+
+function my_post_time_ago_function()
+{
+	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
+}
+add_filter('the_time', 'my_post_time_ago_function');
 
 //logo admin
 $custom_logo_id = get_theme_mod('custom_logo');
