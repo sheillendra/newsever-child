@@ -122,14 +122,6 @@
                     <?php if (!empty($newsever_copy_right)): ?>
                         <?php echo esc_html($newsever_copy_right); ?>
                     <?php endif; ?>
-                    <?php $newsever_theme_credits = newsever_get_option('hide_footer_copyright_credits'); ?>
-                    <?php if ($newsever_theme_credits != 1): ?>
-                        <span class="sep"> | </span>
-                        <?php
-                        /* translators: 1: Theme name, 2: Theme author. */
-                        printf(esc_html__('%1$s by %2$s.', 'newsever'), '<a href="https://afthemes.com/products/newsever">Newsever</a>', 'AF themes');
-                        ?>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
