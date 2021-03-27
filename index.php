@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file
  *
@@ -13,65 +14,69 @@
  */
 
 get_header(); ?>
-    <section class="section-block-upper af-container-block-wrapper clearfix">
+<?php if (is_front_page() && is_active_sidebar('home-content-widgets')) : ?>
+	<?php do_action('newsever_front_page_section'); ?>
+<?php else : ?>
+	<section class="section-block-upper af-container-block-wrapper clearfix">
 
-        <div id="primary" class="content-area">
-            <main id="main" class="site-main">
-                <!--<div class="af-container-row">-->
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main">
+				<!--<div class="af-container-row">-->
 
 				<?php
-				if ( have_posts() ) :
+				if (have_posts()) :
 
-					if ( is_home() && ! is_front_page() ) : ?>
-                        <header>
-                            <h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-                        </header>
+					if (is_home() && !is_front_page()) : ?>
+						<header>
+							<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+						</header>
 
 					<?php
 					endif;
 
 					//div wrap start
-                        do_action('newsever_archive_layout_before_loop');
+					do_action('newsever_archive_layout_before_loop');
 					?>
-                    <!--<div class="af-container-row aft-archive-wrapper clearfix <?php /*echo esc_attr( $archive_class ); */?>">-->
+					<!--<div class="af-container-row aft-archive-wrapper clearfix <?php /*echo esc_attr( $archive_class ); */ ?>">-->
 
-						<?php while ( have_posts() ) : the_post();
+					<?php while (have_posts()) : the_post();
 
-							/*
+						/*
 							 * Include the Post-Format-specific template for the content.
 							 * If you want to override this in a child theme, then include a file
 							 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 							 */
 
-							get_template_part( 'template-parts/content', get_post_format() );
+						get_template_part('template-parts/content', get_post_format());
 
 
-						endwhile;
+					endwhile;
 					//div wrap end
-						do_action('newsever_archive_layout_after_loop');
+					do_action('newsever_archive_layout_after_loop');
 
-						?>
+					?>
 
 				<?php
 
 				else :
-					get_template_part( 'template-parts/content', 'none' );
+					get_template_part('template-parts/content', 'none');
 
 				endif; ?>
 
-                <!--</div>-->
-            </main><!-- #main -->
-            <div class="col-1">
-                <div class="newsever-pagination">
+				<!--</div>-->
+			</main><!-- #main -->
+			<div class="col-1">
+				<div class="newsever-pagination">
 					<?php newsever_numeric_pagination(); ?>
-                </div>
-            </div>
-        </div><!-- #primary -->
+				</div>
+			</div>
+		</div><!-- #primary -->
 
 		<?php
 		get_sidebar();
 		?>
 
-    </section>
+	</section>
+<?php endif; ?>
 <?php
 get_footer();
