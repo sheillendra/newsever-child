@@ -100,7 +100,7 @@ if ( ! function_exists( 'suffice_child_enqueue_child_styles' ) ) {
 	    // loading child style
 	    wp_register_style(
 	      'child-style',
-	      get_stylesheet_directory_uri() . '/style.css',
+	      get_stylesheet_directory_uri() . '/style.css'
 	    );
 	    wp_enqueue_style( 'child-style');
 	 }
