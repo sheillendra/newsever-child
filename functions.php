@@ -117,11 +117,11 @@ function my_comment_time_ago_function()
 }
 add_filter('get_comment_date', 'my_comment_time_ago_function');
 
-function my_post_time_ago_function()
-{
-	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
-}
-add_filter('the_time', 'my_post_time_ago_function');
+//function my_post_time_ago_function()
+//{
+//	return sprintf(esc_html__('%s lalu', 'newsever'), human_time_diff(get_the_time('U'), current_time('timestamp')));
+//}
+//add_filter('the_time', 'my_post_time_ago_function');
 
 //logo admin
 $custom_logo_id = get_theme_mod('custom_logo');
